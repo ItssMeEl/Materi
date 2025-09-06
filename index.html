@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Materi Hak dan Kewajiban Warga Negara</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px;
+  }
+  .container {
+    background: rgba(255 255 255 / 0.12);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 720px;
+    padding: 25px 30px 35px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .bot-wrapper {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+    cursor: pointer; /* Indicate clickable */
+  }
+  .bot-avatar {
+    width: 80px;
+    height: 80px;
+    background: #5a4ce6;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+    transform-origin: center;
+  }
+  .bot-avatar::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, #9f91fb, #7463e0);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 15px rgba(255 255 255 / 0.3);
+  }
+  .bot-avatar::after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: 22px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 20px 0 white;
+  }
+  .eyes {
+    position: absolute;
+    top: 28px;
+    left: 18px;
+    width: 44px;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+  .eye {
+    background: white;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  .pupil {
+    background: #5a4ce6;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    animation: blink 6s infinite;
+  }
+  .pupil.right {
+    animation-delay: 3s;
+  }
+  @keyframes blink {
+    0%, 5%, 10%, 100% { transform: translateY(0) scaleY(1);}
+    7.5% { transform: translateY(4px) scaleY(0.2);}
+  }
+  .speech-bubble {
+    background: rgba(255 255 255 / 0.9);
+    color: #333;
+    padding: 18px 25px;
+    border-radius: 25px;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 110px;
+    flex-grow: 1;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .speech-bubble::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -20px;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 20px solid rgba(255 255 255 / 0.9);
+  }
+  .slide-title {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #4527a0;
+  }
+  .button-container {
+    text-align: right;
+  }
+  button, .external-link {
+    background: #4527a0;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgb(69 39 160 / 0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    user-select: none;
+  }
+  button:disabled {
+    background-color: #a192d0;
+    cursor: default;
+    box-shadow: none;
+  }
+  button:hover:not(:disabled),
+  .external-link:hover {
+    background-color: #6b4ee7;
+    box-shadow: 0 6px 18px rgb(107 78 231 / 0.8);
+  }
+  .external-link {
+    display: inline-block;
+    text-decoration: none;
+  }
+  button.pulse {
+    animation: pulseAnim 1.5s infinite alternate;
+  }
+  @keyframes pulseAnim {
+    0% { transform: scale(1); box-shadow: 0 4px 12px rgb(69 39 160 / 0.6);}
+    100% { transform: scale(1.05); box-shadow: 0 8px 24px rgb(107 78 231 / 0.8);}
+  }
+  @keyframes speakingPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  /* Responsive */
+  @media (max-width: 600px) {
+    .container {
+      padding: 25px 20px 30px 20px;
+    }
+    .bot-wrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      cursor: pointer; /* keep pointer on mobile too */
+    }
+    .bot-avatar {
+      width: 70px;
+      height: 70px;
+    }
+    .speech-bubble {
+      min-height: unset;
+      font-size: 1.1rem;
+      padding: 16px 22px;
+      width: 100%;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      transform: translateY(15px);
+      opacity: 0;
+      transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .speech-bubble::after {
+      left: 50%;
+      top: -20px;
+      border-top: none;
+      border-bottom: 20px solid rgba(255 255 255 / 0.9);
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      transform: translateX(-50%);
+      position: absolute;
+    }
+    .slide-title {
+      font-size: 1.4rem;
+      text-align: center;
+      color: #37277d;
+    }
+    .button-container {
+      text-align: center;
+    }
+    button, .external-link {
+      width: 100%;
+      padding: 16px 0;
+      font-size: 1.1rem;
+      border-radius: 40px;
+      box-shadow: 0 8px 20px rgb(69 39 160 / 0.7);
+      transform: scale(1);
+    }
+    button.pulse {
+      animation: pulseAnim 1.5s infinite alternate;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container" role="main" aria-live="polite" aria-atomic="true">
+  <div class="bot-wrapper" aria-label="Bot penjelas materi" tabindex="0" role="button" aria-pressed="false" >
+    <div class="bot-avatar" aria-hidden="true">
+      <div class="eyes">
+        <div class="eye"><div class="pupil"></div></div>
+        <div class="eye"><div class="pupil right"></div></div>
+      </div>
+    </div>
+    <div class="speech-bubble" id="speech-bubble" aria-label="Penjelasan materi"></div>
+  </div>
+  <div class="button-container">
+    <button id="next-button" aria-label="Tombol Next materi" disabled>Next</button>
+  </div>
+  <audio id="background-audio" loop></audio>
+</div>
+
+<script>
+  (function(){
+    // Slides with background music links
+    const slides = [
+      {
+        title: "Pengertian hak dan kewajiban warga negara",
+        content: "Hak dan kewajiban warga negara adalah dua aspek penting yang menjadi dasar dalam kehidupan bermasyarakat dan bernegara. Hak adalah segala sesuatu yang menjadi hak atau milik warga negara yang diakui dan dilindungi oleh hukum. Sedangkan kewajiban adalah tanggung jawab yang harus dipenuhi oleh warga negara demi menjaga kelangsungan negara dan kehidupan bermasyarakat.",
+        sound: "https://files.catbox.moe/mxnv49.mp3" // Replace with actual mp3 URLs
+      },
+      {
+        title: "Contoh hak warga negara",
+        content: "Beberapa contoh hak warga negara antara lain hak atas pendidikan, hak untuk memilih dalam pemilihan umum, hak atas kebebasan berpendapat, dan hak memperoleh perlindungan hukum.",
+        sound: "https://files.catbox.moe/e90zsi.mp3"
+      },
+      {
+        title: "Contoh kewajiban warga negara",
+        content: "Contoh kewajiban warga negara meliputi membayar pajak, menaati hukum dan peraturan, mengikuti pendidikan dasar, dan menjaga persatuan dan kesatuan bangsa.",
+        sound: "https://files.catbox.moe/zr29ig.mp3"
+      },
+      {
+        title: "Pentingnya menjalankan keduanya seimbang",
+        content: "Menjalankan hak dan kewajiban secara seimbang penting agar sebuah negara dapat berjalan harmonis. Hak tanpa kewajiban dapat menimbulkan ketidakseimbangan sosial, sedangkan kewajiban tanpa hak dapat menyebabkan ketidakadilan dan penindasan.",
+        sound: "https://files.catbox.moe/5gd048.mp3"
+      },
+      {
+        title: "Dampak positif jika dilaksanakan",
+        content: "Jika hak dan kewajiban dijalankan dengan baik, maka akan tercipta masyarakat yang adil, makmur, dan damai dengan tingkat partisipasi yang tinggi dalam kehidupan berbangsa dan bernegara.",
+        sound: "https://files.catbox.moe/hpt3bq.mp3"
+      },
+      {
+        title: "Akibat kalau diabaikan",
+        content: "Mengabaikan hak dan kewajiban dapat menyebabkan ketidakstabilan sosial, konflik antar warga, rendahnya kualitas kehidupan masyarakat, dan lemahnya negara dalam menghadapi tantangan.",
+        sound: "https://files.catbox.moe/887g0h.mp3"
+      },
+      {
+        title: "Kesimpulan",
+        content: "Hak dan kewajiban warga negara adalah dua hal yang tidak bisa dipisahkan. Keduanya harus dijalankan secara seimbang untuk mencapai kehidupan berbangsa dan bernegara yang harmonis dan sejahtera.",
+        sound: "https://files.catbox.moe/wn85p8.mp3"
+      }
+    ];
+
+    const externalUrl = "https://itssmeel.github.io/Kuis/";
+
+    const speechBubble = document.getElementById('speech-bubble');
+    const nextButton = document.getElementById('next-button');
+    const botWrapper = document.querySelector('.bot-wrapper');
+    const botAvatar = document.querySelector('.bot-avatar');
+    const backgroundAudio = document.getElementById('background-audio');
+
+    let currentSlide = 0;
+    let animationTimeout = null;
+    let isAnimating = false;
+    let musicStarted = false;
+
+    function showSpeechBubble() {
+      speechBubble.style.opacity = '0';
+      speechBubble.style.transform = 'translateY(15px)';
+      void speechBubble.offsetWidth;
+      speechBubble.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      speechBubble.style.opacity = '1';
+      speechBubble.style.transform = 'translateY(0)';
+    }
+
+    function hideSpeechBubble() {
+      speechBubble.style.opacity = '0';
+      speechBubble.style.transform = 'translateY(15px)';
+    }
+
+    function typeText(text, callback) {
+      isAnimating = true;
+      nextButton.disabled = true;
+
+      speechBubble.innerHTML = `<div class="slide-title">${slides[currentSlide].title}</div><div class="slide-content"></div>`;
+      const contentEl = speechBubble.querySelector('.slide-content');
+
+      nextButton.classList.remove('pulse');
+      startBotSpeaking();
+      showSpeechBubble();
+
+      contentEl.textContent = '';
+      const letters = text.split('').map(char => {
+        const span = document.createElement('span');
+        span.textContent = char;
+        span.style.opacity = '0';
+        span.style.transition = 'opacity 0.3s ease';
+        return span;
+      });
+      letters.forEach(span => contentEl.appendChild(span));
+
+      let index = 0;
+
+      function fadeInLetter() {
+        if (index < letters.length) {
+          letters[index].style.opacity = '1';
+          index++;
+          const delay = 20 + Math.random() * 30;
+          animationTimeout = setTimeout(fadeInLetter, delay);
+        } else {
+          finishAnimation(callback);
+        }
+      }
+
+      fadeInLetter();
+    }
+
+    function startBotSpeaking() {
+      botAvatar.style.animation = 'speakingPulse 1.2s ease-in-out infinite';
+    }
+
+    function stopBotSpeaking() {
+      botAvatar.style.animation = 'none';
+    }
+
+    function finishAnimation(callback) {
+      musicStarted = false; // reset music started flag
+      isAnimating = false;
+      stopBotSpeaking();
+      // Wait for user interaction on bot or click to start music
+      nextButton.disabled = true; // disable until music starts
+      nextButton.classList.remove('pulse');
+      if(callback) callback();
+    }
+
+    function playSlideAudio(audioUrl) {
+      if (!audioUrl) {
+        backgroundAudio.pause();
+        backgroundAudio.currentTime = 0;
+        nextButton.disabled = false;
+        nextButton.classList.add('pulse');
+        return;
+      }
+      if (backgroundAudio.src !== audioUrl) {
+        backgroundAudio.src = audioUrl;
+      }
+      backgroundAudio.volume = 0.5;
+      backgroundAudio.loop = false;
+    }
+
+    function tryStartMusic() {
+      if (musicStarted || isAnimating) return;
+      musicStarted = true;
+      backgroundAudio.play().then(() => {
+        nextButton.disabled = false;
+        nextButton.classList.add('pulse');
+      }).catch(e => {
+        console.warn("Music playback prevented by browser.", e);
+        // User must interact again, keep button disabled
+      });
+    }
+
+    function showSlide(index) {
+      if(index < 0 || index >= slides.length) return;
+      currentSlide = index;
+
+      hideSpeechBubble();
+      clearTimeout(animationTimeout);
+
+      backgroundAudio.pause();
+      backgroundAudio.currentTime = 0;
+      backgroundAudio.onended = null;
+
+      animationTimeout = setTimeout(() => {
+        typeText(slides[index].content, () => {
+          playSlideAudio(slides[index].sound);
+          // Music will start after user interacts with bot area or avatar
+          // So do not autoplay here, wait for user interaction
+        });
+        if (currentSlide === slides.length - 1) {
+          nextButton.textContent = "Lanjut Kuis";
+          nextButton.setAttribute('aria-label', 'Buka website eksternal');
+        } else {
+          nextButton.textContent = "Next";
+          nextButton.setAttribute('aria-label', 'Tombol Next materi');
+        }
+      }, 420);
+    }
+
+    // Start music on bot wrapper interaction
+    botWrapper.addEventListener('click', () => {
+      tryStartMusic();
+    });
+    botWrapper.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        tryStartMusic();
+        e.preventDefault();
+      }
+    });
+
+    nextButton.addEventListener('click', () => {
+      if (isAnimating || !musicStarted) return; // block next if animating or music not started
+      if (currentSlide === slides.length - 1) {
+        backgroundAudio.pause();
+        window.open(externalUrl, '_blank', 'noopener,noreferrer');
+      } else {
+        showSlide(currentSlide + 1);
+      }
+    });
+
+    window.onload = () => {
+      showSlide(0);
+      nextButton.classList.add('pulse');
+    };
+  })();
+</script>
+</body>
+</html>
